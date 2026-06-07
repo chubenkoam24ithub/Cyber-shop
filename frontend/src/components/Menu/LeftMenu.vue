@@ -1,4 +1,7 @@
 <template>
+
+    <ProductCart :products="filteredProducts" :apiUrl="apiUrl" />
+    
     <div v-if="showMessage" class="message-box">
         <div class="message-box_filter">
             <img src="@/assets/Arrow.png" width="24" height="24" @click="toggleMessage" />
@@ -238,9 +241,8 @@ watch(sortOption, () => {
 
 
 
-// Храним товары и базовый URL для API
-
-const apiUrl = API_BASE_URL;
+import { API_BASE_URL } from '@/config'; // Импортируем конфиг
+const apiUrl = ref(API_BASE_URL); // Создаем реактивную переменную
 
 // Переменные для управления пагинацией
 // Пагинация
