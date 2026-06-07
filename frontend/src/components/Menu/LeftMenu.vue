@@ -238,10 +238,6 @@ watch(sortOption, () => {
 
 
 
-
-
-
-import { API_BASE_URL } from '@/config'; // Импортируем конфиг
 const apiUrl = ref(API_BASE_URL); // Создаем реактивную переменную
 
 // Переменные для управления пагинацией
