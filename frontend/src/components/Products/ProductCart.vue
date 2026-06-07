@@ -32,13 +32,10 @@ const router = useRouter(); // инициализация роутера
 
 
 const props = defineProps({
-    products: {
-        type: Object,
-        required: true
-    },
-    apiUrl: {
-        type: String,
-        required: true
+    products: { type: Array, required: true },
+    apiUrl: { 
+        type: String, 
+        default: 'https://cyber-shop-vue.onrender.com' // Значение по умолчанию
     }
 });
 
