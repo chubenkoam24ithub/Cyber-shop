@@ -445,7 +445,7 @@ onMounted(async () => {
 // Функция для загрузки категорий
 const loadCategories = async () => {
     try {
-        const response = await fetch(`http://localhost:1452/api/products`);
+        const response = await fetch(`${API_BASE_URL}/api/products`); 
         if (!response.ok) {
             throw new Error('Ошибка при загрузке категорий');
         }
@@ -473,7 +473,7 @@ function updateFilter(newFilter) {
 // Функция для загрузки товаров
 const loadProducts = async () => {
     try {
-        const response = await fetch('http://localhost:1452/api/products');
+        const response = await fetch(`${API_BASE_URL}/api/products`);
         if (!response.ok) {
             throw new Error('Ошибка при загрузке товаров');
         }
