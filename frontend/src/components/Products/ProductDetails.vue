@@ -131,26 +131,36 @@ import RatingStars from '../Raitings/RatingStars.vue';
 import ShowButton from '../Buttons/ShowButton.vue';
 import { useStore } from 'vuex'; // Используем store
 import ProductCart from './ProductCart.vue';
-import { API_BASE_URL } from '@/config';
+
     
 const route = useRoute();
 const router = useRouter();
 const product = ref({});
 const relatedProducts = ref([]); // Сопутствующие товары
 const productImageUrl = ref('');
-const response = await fetch(`${API_BASE_URL}/api/products/${id}`);
+
 
 const store = useStore();
 let isAddingToCart = false;
-
+    
+import { API_BASE_URL } from '@/config';
+    
 const fetchProductData = async (productId) => {
-    const productResponse = await fetch(`${apiUrl}/api/products/${productId}`);
+    // Используем ${API_BASE_URL} вместо apiUrl
+    const productResponse = await fetch(`${API_BASE_URL}/api/products/${productId}`);
+    if (!productResponse.ok) throw new Error('Ошибка загрузки продукта');
+    
     const productData = await productResponse.json();
     product.value = productData;
-    productImageUrl.value = `${apiUrl}/${productData.images[0]}`;
+    
+    // Важно: убедитесь, что путь к картинке формируется правильно
+    // Если API отдает полный URL, то ${API_BASE_URL}/ не нужен
+    productImageUrl.value = productData.images && productData.images.length > 0 
+        ? `${API_BASE_URL}/${productData.images[0]}` 
+        : '';
 
     // Получаем сопутствующие товары
-    const relatedResponse = await fetch(`${apiUrl}/api/products?category=${productData.category}&excludeId=${productId}`);
+    const relatedResponse = await fetch(`${API_BASE_URL}/api/products?category=${productData.category}&excludeId=${productId}`);
     const relatedData = await relatedResponse.json();
 
     // Функция для случайного перемешивания массива (Алгоритм Фишера-Йейтса)
