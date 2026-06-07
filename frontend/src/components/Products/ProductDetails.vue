@@ -131,13 +131,14 @@ import RatingStars from '../Raitings/RatingStars.vue';
 import ShowButton from '../Buttons/ShowButton.vue';
 import { useStore } from 'vuex'; // Используем store
 import ProductCart from './ProductCart.vue';
-
+import { API_BASE_URL } from '@/config';
+    
 const route = useRoute();
 const router = useRouter();
 const product = ref({});
 const relatedProducts = ref([]); // Сопутствующие товары
 const productImageUrl = ref('');
-const apiUrl = 'http://localhost:1452';
+const response = await fetch(`${API_BASE_URL}/api/products/${id}`);
 
 const store = useStore();
 let isAddingToCart = false;
